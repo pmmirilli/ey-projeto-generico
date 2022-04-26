@@ -1,0 +1,108 @@
+// ##### Positioning and sizing #####
+
+.margin-default {
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.container-form {
+  @extend .bordered-large;
+  @extend .shadowed;
+
+  position: relative;
+  padding: 20px 40px 20px 40px;
+  width: 500px;
+  // height: 300px;
+}
+
+.container-textbox {
+  @extend .margin-default;
+
+  position: relative;
+  height: 30px;
+}
+
+.input-textbox {
+  @extend .bordered-small;
+
+  height: 23px;
+  width: 90%;
+}
+
+.label-top {
+  position: absolute;
+  background-color: white;
+  padding: 0px 3px 0px 3px;
+  bottom: 55%;
+  left: 7.5%;
+}
+
+.recover-password {
+  position: absolute;
+  right: 30px;
+  bottom: 18%;
+}
+
+.container-button-checkbox {
+  @extend .margin-default;
+
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  padding: 1% 4.25%;
+}
+
+.input-checkbox {
+  @extend .bordered-small;
+}
+
+// .label-checkbox {
+// }
+
+.container-register {
+  @extend .margin-default;
+
+  position: relative;
+  height: 30px;
+  margin-top: 10%;
+  padding-bottom: 30px;
+}
+
+.register-text {
+  position: relative;
+  bottom: 50%;
+}
+
+button {
+  @extend .bordered-small;
+
+  height: 25px;
+  width: 80px;
+}
+
+
+// ##### Styling #####
+
+// .placeholder {
+//   background-color: rgb(240, 240, 240);
+// }
+
+.bordered-large {
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: #999;
+  border-style: none;
+}
+
+.bordered-small {
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: #999;
+  border-style: solid;
+}
+
+.shadowed {
+  box-shadow: 0px 0px 5px #666;
+}
+
