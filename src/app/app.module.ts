@@ -8,6 +8,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AuthComponent } from './auth/auth.component';
     LoginComponent,
     ErrorPageComponent,
     SignUpComponent,
-    AuthComponent
+    AuthComponent,
+    RecoverPasswordComponent
   ],
   imports: [
     BrowserModule,

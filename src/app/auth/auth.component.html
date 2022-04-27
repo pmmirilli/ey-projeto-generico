@@ -1,9 +1,11 @@
 <div class="centered">
   <!-- Logo container -->
   <div>
-    <img [src]="logoLink" alt="Logo" class="logo">
-    <h4>Conectar-se ao {{ projectName }}</h4>
+    <a routerLink="/auth/login"><img [src]="logoLink" alt="Square Logo" class="logo"></a>
+    <h4>"no sharp edges allowed"</h4>
+    <hr>
+    <h3>Conectar-se ao {{ projectName }}</h3>
   </div>
-  <!-- Login stuff here -->
+  <!-- Login/Sign-up stuff here -->
   <router-outlet></router-outlet>
 </div>

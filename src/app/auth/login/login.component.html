@@ -1,55 +1,70 @@
-<!-- Form container -->
+<!-- Main form container -->
 <div class="container-form">
+  <!-- Dynamic email PIN prompt -->
+  <app-recover-password
+  *ngIf="requestedPasswordReset"
+  (cancel)="onForgotCancel()"
+  (ok)="onAuthOk()"
+  ></app-recover-password>
+  <!-- ### -->
   <form #authForm="ngForm" (ngSubmit)="onSubmit()">
     <!-- User input container -->
     <div class="container-textbox">
       <label class="label-top" for="user">Usuário</label>
       <input
-      class="input-textbox"
-      type="text"
-      name="user"
-      id="user"
-      ngModel
-      required>
+        class="input-textbox"
+        type="text"
+        name="user"
+        id="user"
+        ngModel
+        required
+      >
     </div>
     <!-- Email input container -->
     <div class="container-textbox" *ngIf="isSigningUp">
       <label class="label-top" for="user">Email</label>
       <input
-      class="input-textbox"
-      type="email"
-      name="email"
-      id="email"
-      ngModel
-      required
-      email>
+        class="input-textbox"
+        type="email"
+        name="email"
+        id="email"
+        ngModel
+        required
+        email
+      >
     </div>
     <!-- Password input container -->
     <div class="container-textbox">
       <label class="label-top" for="password">Senha</label>
       <input
-      class="input-textbox"
-      type="password"
-      name="password"
-      id="password"
-      ngModel
-      required
-      minlength="4"
-      (blur)="onConfirmPassword()">
-      <a class="recover-password" *ngIf="!isResettingPassword && !isSigningUp" routerLink="/auth/recover-password" (click)="onForgotPassword()">Esqueci minha senha</a>
+        class="input-textbox"
+        type="password"
+        name="password"
+        id="password"
+        ngModel
+        required
+        minlength="4"
+      >
+      <a
+        class="recover-password"
+        *ngIf="!isResettingPassword && !isSigningUp"
+        routerLink="/"
+        (click)="onForgotPassword()"
+      >Esqueci minha senha</a>
     </div>
     <!-- Password confirm input container -->
     <div class="container-textbox" *ngIf="isResettingPassword || isSigningUp">
       <label class="label-top" for="confirm-password">Confirmar senha</label>
       <input
-      class="input-textbox"
-      type="password"
-      name="confirm-password"
-      id="confirm-password"
-      ngModel
-      required
-      minlength="4"
-      (blur)="onConfirmPassword()">
+        class="input-textbox"
+        type="password"
+        name="confirm-password"
+        id="confirm-password"
+        ngModel
+        required
+        minlength="4"
+        (blur)="onConfirmPassword()"
+      >
     </div>
     <!-- Remember me checkbox and login button container -->
     <div class="container-button-checkbox">
@@ -61,13 +76,21 @@
         ngModel>
         <label class="label-checkbox" for="remember-me">Manter-me conectado</label>
       </span>
-      <button type="submit" role="button" [disabled]="!authForm.valid">Entrar</button>
+      <button
+        type="submit"
+        role="button"
+        [disabled]="!authForm.valid"
+      >Entrar</button>
     </div>
     <!-- Register button container -->
     <div class="container-register">
-      <p class="register-text">Ainda não possui uma conta? <a routerLink="/auth/sign-up" (click)="onSignUp()">Cadastre-se</a></p>
+      <p class="register-text">Ainda não possui uma conta?
+        <a
+          routerLink="/auth/sign-up"
+          (click)="onSignUp()"
+        >Cadastre-se</a>
+      </p>
     </div>
     <!-- ### -->
   </form>
 </div>
-<router-outlet></router-outlet>
