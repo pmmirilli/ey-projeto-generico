@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,24 +8,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./recover-password.component.scss']
 })
 export class RecoverPasswordComponent {
-  @Output() ok = new EventEmitter<void>();
-  @Output() cancel = new EventEmitter<void>();
+  @ViewChild('authForm') authForm!: NgForm;
+
+  passwordsMatch: boolean = false;
 
   constructor(private router: Router) { }
 
-  onOk() {
-    this.ok.emit();
+  onConfirmPassword(): boolean {
+    if(this.authForm.value['confirm-password'] === this.authForm.value['password']) {
+      console.log('The provided passwords match.');
+      return true;
+    } else {
+      console.log('The provided passwords DO NOT match.');
+      return false;
+    }
   }
 
-  onCancel() {
-    this.cancel.emit();
-  }
+  onSubmit() {
+    this.passwordsMatch = this.onConfirmPassword();
+    console.log(this.passwordsMatch);
 
-  onSendEmail() {
-    // Send email with a validation 4-digit PIN code.
-  }
-
-  onNextPin(pinId: number) {
-    // Set focus to PIN digit input specified by pinId.
+    if (this.onConfirmPassword()) {
+      console.log('Form submitted.');
+      this.router.navigate(['auth/login']);
+    }
+    console.log(this.authForm.value);
   }
 }

@@ -5,6 +5,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { AuthComponent } from './auth/auth.component';
 import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
+import { EmailPinPromptComponent } from './auth/email-pin-prompt/email-pin-prompt.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
@@ -12,7 +13,8 @@ const routes: Routes = [
     { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'sign-up', component: SignUpComponent },
-    { path: 'recover-password', component: RecoverPasswordComponent }
+    { path: 'recover-password', component: RecoverPasswordComponent },
+    { path: 'test', component: EmailPinPromptComponent }
   ] },
   { path: 'error-page', component: ErrorPageComponent },
   { path: '**', redirectTo: '/error-page' }

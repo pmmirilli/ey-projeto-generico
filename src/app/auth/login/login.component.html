@@ -1,12 +1,5 @@
 <!-- Main form container -->
 <div class="container-form">
-  <!-- Dynamic email PIN prompt -->
-  <app-recover-password
-  *ngIf="requestedPasswordReset"
-  (cancel)="onForgotCancel()"
-  (ok)="onAuthOk()"
-  ></app-recover-password>
-  <!-- ### -->
   <form #authForm="ngForm" (ngSubmit)="onSubmit()">
     <!-- User input container -->
     <div class="container-textbox">
@@ -18,19 +11,6 @@
         id="user"
         ngModel
         required
-      >
-    </div>
-    <!-- Email input container -->
-    <div class="container-textbox" *ngIf="isSigningUp">
-      <label class="label-top" for="user">Email</label>
-      <input
-        class="input-textbox"
-        type="email"
-        name="email"
-        id="email"
-        ngModel
-        required
-        email
       >
     </div>
     <!-- Password input container -->
@@ -47,35 +27,24 @@
       >
       <a
         class="recover-password"
-        *ngIf="!isResettingPassword && !isSigningUp"
+        *ngIf="!isResettingPassword"
         routerLink="/"
         (click)="onForgotPassword()"
       >Esqueci minha senha</a>
     </div>
-    <!-- Password confirm input container -->
-    <div class="container-textbox" *ngIf="isResettingPassword || isSigningUp">
-      <label class="label-top" for="confirm-password">Confirmar senha</label>
-      <input
-        class="input-textbox"
-        type="password"
-        name="confirm-password"
-        id="confirm-password"
-        ngModel
-        required
-        minlength="4"
-        (blur)="onConfirmPassword()"
-      >
-    </div>
     <!-- Remember me checkbox and login button container -->
     <div class="container-button-checkbox">
-      <span>
+      <div>
+        <app-custom-checkbox label="Manter-me conectado" [default]="false" (checkedState)="getCheckedState($event)"></app-custom-checkbox>
+      </div>
+      <!-- <span>
         <input
         class="input-checkbox"
         type="checkbox" name="remember-me"
         id="rememeber-me"
         ngModel>
         <label class="label-checkbox" for="remember-me">Manter-me conectado</label>
-      </span>
+      </span> -->
       <button
         type="submit"
         role="button"
@@ -87,10 +56,16 @@
       <p class="register-text">Ainda não possui uma conta?
         <a
           routerLink="/auth/sign-up"
-          (click)="onSignUp()"
-        >Cadastre-se</a>
+        >Cadastre-se</a>.
       </p>
     </div>
     <!-- ### -->
   </form>
 </div>
+<!-- Dynamic email PIN prompt -->
+<app-email-pin-prompt
+  class="email-pin-prompt"
+  *ngIf="requestedPasswordReset"
+  (cancel)="onRecoverCancel()"
+></app-email-pin-prompt>
+<!-- ### -->

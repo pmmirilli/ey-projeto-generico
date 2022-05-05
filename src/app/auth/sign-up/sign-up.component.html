@@ -1,1 +1,70 @@
-<h3>Sign-Up Page: maybe just hide or show comps in the login component. (TODO)</h3>
+<!-- Main form container -->
+<div class="container-form">
+  <!-- Dynamic email PIN prompt -->
+
+  <!-- ### -->
+  <form #authForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- User input container -->
+    <div class="container-textbox">
+      <label class="label-top" for="user">Usuário</label>
+      <input
+        class="input-textbox"
+        type="text"
+        name="user"
+        id="user"
+        ngModel
+        required
+      >
+    </div>
+    <!-- Email input container -->
+    <div class="container-textbox">
+      <label class="label-top" for="user">Email</label>
+      <input
+        class="input-textbox"
+        type="email"
+        name="email"
+        id="email"
+        ngModel
+        required
+        email
+      >
+    </div>
+    <!-- Password input container -->
+    <div class="container-textbox">
+      <label class="label-top" for="password">Senha</label>
+      <input
+        class="input-textbox"
+        type="password"
+        name="password"
+        id="password"
+        ngModel
+        required
+        minlength="4"
+      >
+    </div>
+    <!-- Password confirm input container -->
+    <div class="container-textbox">
+      <label class="label-top" for="confirm-password">Confirmar senha</label>
+      <input
+        class="input-textbox"
+        type="password"
+        name="confirm-password"
+        id="confirm-password"
+        ngModel
+        required
+        minlength="4"
+        (blur)="onConfirmPassword()"
+      >
+    </div>
+    <!-- Remember me checkbox and confirm button container -->
+    <div class="container-button-checkbox">
+      <div></div>
+      <button
+        type="submit"
+        role="button"
+        [disabled]="!authForm.valid"
+      >Confirmar</button>
+    </div>
+    <!-- ### -->
+  </form>
+</div>

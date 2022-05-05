@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
+
+
+  onSubmit() {
+
+  }
+
+  onConfirmPassword() {
+
+  }
 }

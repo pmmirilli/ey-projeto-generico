@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AuthComponent {
   projectName: string = 'Rounded Square';
-  logoLink: string = 'https://logosmarcas.net/wp-content/uploads/2020/12/Square-Logo-650x366.png';
+  logoPath: string = '/assets/images/Square-Logo-650x366.png';
+  // logoPath: string = 'https://logosmarcas.net/wp-content/uploads/2020/12/Square-Logo-650x366.png';
 }

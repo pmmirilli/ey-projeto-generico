@@ -1,4 +1,5 @@
 // ##### Positioning and sizing ##### //
+
 .margin-default {
   margin-top: 10px;
   padding-top: 10px;
@@ -51,11 +52,8 @@
 }
 
 .input-checkbox {
-  @extend .bordered-small; // Hmmm...... /////////////
+  @extend .bordered-small;
 }
-
-// .label-checkbox {
-// }
 
 .container-register {
   @extend .margin-default;
@@ -74,54 +72,65 @@
 button {
   @extend .bordered-small;
 
+  position: relative;
   height: 25px;
   width: 80px;
 
   &:hover {
     cursor: pointer;
-    background-color: hsla(0, 0, 100, 0.5);
-    box-shadow: 0 0 10px rgba(160, 110, 110, 0.5) inset;
+    background-color: gainsboro;
+    // box-shadow: 0 0 10px grey inset;
   }
   &:active {
-    background-color: rgba(160, 110, 110, 0.5);
-    box-shadow: 0 0 0px #999 inset;
+    background-color: ghostwhite;
+    box-shadow: 0 0 0px grey inset;
   }
   &:disabled {
     cursor: not-allowed;
-    background-color: rgb(250, 250, 250);
-    box-shadow: 0 0 0px #999 inset;
+    background-color: ghostwhite;
+    box-shadow: 0 0 0px grey inset;
   }
 }
 
 input.ng-invalid.ng-touched {
-  border: 2px solid rgb(150, 30, 30);
-  box-shadow: 0 0 3px rgb(150, 30, 30) inset;
+  border: 1px solid darkred;
+  box-shadow: 0 0 3px darkred inset;
+}
+
+.email-pin-prompt {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: -160px;
+}
+
+.outline {
+  outline: 1px solid red;
 }
 
 
-// ##### Styling #####
 
-// .placeholder {
-//   background-color: rgb(240, 240, 240);
-// }
+// ##### Styling #####
 
 .bordered-large {
   @extend .shadowed;
 
   border-radius: 10px;
   border-width: 1px;
-  border-color: #999;
-  border-style: none;
+  border-color: grey;
+  border-style: solid;
 }
 
 .bordered-small {
   border-radius: 5px;
   border-width: 1px;
-  border-color: #999;
+  border-color: grey;
   border-style: solid;
 }
 
 .shadowed {
-  box-shadow: 0px 0px 5px #666;
+  box-shadow: 0px 0px 5px grey;
 }
 

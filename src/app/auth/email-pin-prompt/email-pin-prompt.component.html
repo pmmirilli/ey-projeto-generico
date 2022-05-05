@@ -1,0 +1,107 @@
+<!-- Backdrop -->
+<div class="backdrop" (click)="onCancel()"></div>
+<!-- Main form container -->
+<div class="container-email-prompt">
+  <h4>Recuperação de senha</h4>
+  <p>Favor preencher o endereço de email da conta cuja senha deseja recuperar.</p>
+  <form #emailForm="ngForm" (ngSubmit)="onSendEmail()">
+    <!-- Email input and Send button -->
+    <div class="container-email">
+      <label class="label-top" for="email">Email</label>
+      <input
+        class="input-email"
+        type="text"
+        name="email"
+        id="email"
+        ngModel
+        required
+        email
+      >
+    </div>
+    <div class="container-buttons">
+      <span>
+        <button
+          type="submit"
+          [disabled]="!emailForm.valid || emailSent"
+        >Enviar</button>
+      </span>
+    </div>
+  </form>
+  <p *ngIf="emailSent">Ainda não recebeu o email? Clique em "Enviar" novamente{{ emailFailedMessage }}.</p>
+  <hr>
+  <form #pinForm="ngForm" (ngSubmit)="onOk()">
+    <!-- PIN code input and buttons -->
+    <div class="container-pin-code">
+      <span>
+        <input
+          class="pin-code"
+          type="password"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          name="pin1"
+          id="pin1"
+          ngModel
+          required
+          #pin1
+          minlength="1"
+          maxlength="1"
+          (keyup)="onNextPin($event)"
+          (focus)="pin1.select()"
+        >
+        <input
+          class="pin-code"
+          type="password"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          name="pin2"
+          id="pin2"
+          ngModel
+          required
+          #pin2
+          minlength="1"
+          maxlength="1"
+          (keyup)="onNextPin($event)"
+          (focus)="pin2.select()"
+        >
+        <input
+          class="pin-code"
+          type="password"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          name="pin3"
+          id="pin3"
+          ngModel
+          required
+          #pin3
+          minlength="1"
+          maxlength="1"
+          (keyup)="onNextPin($event)"
+          (focus)="pin3.select()"
+        >
+        <input
+          class="pin-code"
+          type="password"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          name="pin4"
+          id="pin4"
+          ngModel
+          required
+          #pin4
+          minlength="1"
+          maxlength="1"
+          (keyup)="onNextPin($event)"
+          (focus)="pin4.select()"
+        >
+      </span>
+      <p *ngIf="!pinForm.valid && pinErrorMessage" class="error-text">{{ pinErrorMessage }}</p>
+      <div class="container-buttons">
+        <span>
+          <button type="submit" [disabled]="!pinForm.valid">OK</button>
+          <button type="button" (click)="onCancel()">Cancelar</button>
+        </span>
+      </div>
+    </div>
+    <!-- ### -->
+  </form>
+</div>

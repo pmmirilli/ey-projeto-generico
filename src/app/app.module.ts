@@ -9,6 +9,8 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
+import { CustomCheckboxComponent } from '../assets/styles/custom-checkbox/custom-checkbox.component';
+import { EmailPinPromptComponent } from './auth/email-pin-prompt/email-pin-prompt.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { RecoverPasswordComponent } from './auth/recover-password/recover-passwo
     ErrorPageComponent,
     SignUpComponent,
     AuthComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    CustomCheckboxComponent,
+    EmailPinPromptComponent
   ],
   imports: [
     BrowserModule,

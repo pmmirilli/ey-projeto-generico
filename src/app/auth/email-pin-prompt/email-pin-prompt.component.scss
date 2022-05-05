@@ -1,0 +1,129 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 50;
+}
+
+.outline {
+  outline: 1px solid red;
+}
+
+.container-email-prompt {
+  @extend .bordered-large;
+
+  position: absolute;
+  width: 20vw;
+  min-width: 300px;
+  padding: 20px;
+  z-index: 100;
+  background: white;
+}
+
+.form {
+  padding: 20px;
+  margin: 20px 0px;
+}
+
+.label-top {
+  position: absolute;
+  background-color: white;
+  padding: 0px 3px;
+  bottom: 55%;
+  left: 7.5%;
+}
+
+.container-email {
+  margin-top: 10px;
+  padding-top: 10px;
+
+  position: relative;
+  height: 30px;
+}
+
+.input-email {
+  width: 90%;
+}
+
+.container-buttons {
+  position: relative;
+  margin: 20px 0px 0px;
+}
+
+.container-pin-code {
+  position: relative;
+  margin: 10px 0px;
+}
+
+.pin-code {
+  width: 23px;
+  margin: 0px 1px;
+  text-align: center;
+  font-size: larger;
+}
+
+.error-text {
+  color: darkred;
+}
+
+hr {
+  margin: 30px;
+}
+
+input {
+  @extend .bordered-small;
+  height: 23px;
+}
+
+button {
+  @extend .bordered-small;
+
+  position: relative;
+  right: 1px;
+  height: 25px;
+  width: 80px;
+  margin: 0px 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: gainsboro;
+    // box-shadow: 0 0 10px grey inset;
+  }
+  &:active {
+    background-color: ghostwhite;
+    box-shadow: 0 0 0px grey inset;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ghostwhite;
+    box-shadow: 0 0 0px grey inset;
+  }
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid darkred;
+  box-shadow: 0 0 3px darkred inset;
+}
+
+.bordered-large {
+  @extend .shadowed;
+
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: grey;
+  border-style: solid;
+}
+
+.bordered-small {
+  border-radius: 5px;
+  border-width: 1px;
+  border-color:grey;
+  border-style: solid;
+}
+
+.shadowed {
+  box-shadow: 0px 0px 5px #666;
+}
