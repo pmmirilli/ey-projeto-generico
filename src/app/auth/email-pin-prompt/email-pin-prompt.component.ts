@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthEmailService } from 'src/app/services/auth.email.service';
+import { AuthEmailService } from 'src/app/services/auth-email.service';
 
 @Component({
   selector: 'app-email-pin-prompt',
@@ -18,7 +18,7 @@ export class EmailPinPromptComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private authEmailService: AuthEmailService) { }
 
   ngOnInit(): void {
-    this.authEmailService.emailFailedMessage.subscribe(
+    this.authEmailService.emailFailedMessage.subscribe( // AGORA, É NECESSÁRIO FAZER DE MODO QUE A CONTAGEM CONTINUE MESMO COM O APLICATIVO RECARREGADO. SERVIÇO DE IP?
       (message) => {
         this.emailFailedMessage = message;
         this.emailSent = !!message;
@@ -41,7 +41,7 @@ export class EmailPinPromptComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  onNextPin(event: any) { // Qual é o tipo correto aqui?
+  onNextPin(event: any) { // Qual é o tipo correto aqui? ////////////////////////
     let element: HTMLElement;
     if (event.key !== 'Backspace') {
       element = event.target?.nextElementSibling;

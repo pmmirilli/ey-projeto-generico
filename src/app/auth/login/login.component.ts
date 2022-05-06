@@ -12,12 +12,11 @@ export class LoginComponent {
   requestedPasswordReset: boolean = false;
   isResettingPassword: boolean = false;
 
-  /////
+  ///// GETS CHECHED STATE FROM CHECKBOX /////
   isChecked: boolean | undefined;
 
   getCheckedState(state: boolean) {
     this.isChecked = state;
-    console.log(state);
   }
   /////
 

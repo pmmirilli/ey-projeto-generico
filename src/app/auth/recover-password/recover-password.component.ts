@@ -1,37 +1,56 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { AuthPasswordService, ErrorCode } from 'src/app/services/auth-password.service';
 
 @Component({
   selector: 'app-recover-password',
   templateUrl: './recover-password.component.html',
   styleUrls: ['./recover-password.component.scss']
 })
-export class RecoverPasswordComponent {
+export class RecoverPasswordComponent implements OnInit, OnDestroy {
   @ViewChild('authForm') authForm!: NgForm;
 
-  passwordsMatch: boolean = false;
+  passwordsMatch: Subject<boolean> = new Subject<boolean>();
+  errorMessage: string = '';
+  okToProceed: boolean = true;
+  displaySuccessPrompt: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authPasswordService: AuthPasswordService) {}
 
-  onConfirmPassword(): boolean {
-    if(this.authForm.value['confirm-password'] === this.authForm.value['password']) {
-      console.log('The provided passwords match.');
-      return true;
-    } else {
-      console.log('The provided passwords DO NOT match.');
-      return false;
+  ngOnInit(): void {
+    this.passwordsMatch.subscribe(
+      (value) => {
+        this.okToProceed = value;
+        if (!this.okToProceed) {
+          this.errorMessage = this.authPasswordService.errorMessage(ErrorCode.NotAMatch);
+        }
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.passwordsMatch.unsubscribe();
+  }
+
+  onSubmit(): void {
+    this.onCheckPasswords();
+
+    if (this.okToProceed) {
+      this.displaySuccessPrompt = true;
+      // Write new password to user data.
+      // Go to login page after confirm prompt.
+      // this.router.navigate(['auth/login']);
     }
   }
 
-  onSubmit() {
-    this.passwordsMatch = this.onConfirmPassword();
-    console.log(this.passwordsMatch);
-
-    if (this.onConfirmPassword()) {
-      console.log('Form submitted.');
-      this.router.navigate(['auth/login']);
-    }
-    console.log(this.authForm.value);
+  onCheckPasswords() {
+    this.passwordsMatch.next(
+      this.authPasswordService.comparePasswords(
+        this.authForm.value['new-password'],
+        this.authForm.value['confirm-password']
+      )
+    );
   }
 }

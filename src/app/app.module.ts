@@ -11,6 +11,7 @@ import { AuthComponent } from './auth/auth.component';
 import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
 import { CustomCheckboxComponent } from '../assets/styles/custom-checkbox/custom-checkbox.component';
 import { EmailPinPromptComponent } from './auth/email-pin-prompt/email-pin-prompt.component';
+import { PopupMessageComponent } from './shared/components/popup-message/popup-message.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EmailPinPromptComponent } from './auth/email-pin-prompt/email-pin-promp
     AuthComponent,
     RecoverPasswordComponent,
     CustomCheckboxComponent,
-    EmailPinPromptComponent
+    EmailPinPromptComponent,
+    PopupMessageComponent
   ],
   imports: [
     BrowserModule,
