@@ -1,56 +1,44 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { AuthPasswordService, ErrorCode } from 'src/app/services/auth-password.service';
 
 @Component({
   selector: 'app-recover-password',
   templateUrl: './recover-password.component.html',
   styleUrls: ['./recover-password.component.scss']
 })
-export class RecoverPasswordComponent implements OnInit, OnDestroy {
+export class RecoverPasswordComponent {
+
   @ViewChild('authForm') authForm!: NgForm;
 
-  passwordsMatch: Subject<boolean> = new Subject<boolean>();
-  errorMessage: string = '';
-  okToProceed: boolean = true;
-  displaySuccessPrompt: boolean = false;
+  public displaySuccessPrompt: boolean = false;
+  public passwordsOk: boolean = false;
+  public password: string = '';
 
-  constructor(private router: Router, private authPasswordService: AuthPasswordService) {}
+  constructor(private _router: Router, private _location: Location) { }
 
-  ngOnInit(): void {
-    this.passwordsMatch.subscribe(
-      (value) => {
-        this.okToProceed = value;
-        if (!this.okToProceed) {
-          this.errorMessage = this.authPasswordService.errorMessage(ErrorCode.NotAMatch);
-        }
-      }
-    );
+  // Get status from 'passwordsOk' property from NewPasswordComponent.
+  getPasswordsOk(status: boolean): void {
+    this.passwordsOk = status;
   }
 
-  ngOnDestroy(): void {
-    this.passwordsMatch.unsubscribe();
+  // Get password from 'password' property from NewPasswordComponent.
+  getPassword(password: string): void {
+    this.password = password;
+  }
+
+  onReturn(): void {
+    this._location.back();
   }
 
   onSubmit(): void {
-    this.onCheckPasswords();
-
-    if (this.okToProceed) {
+    if (this.passwordsOk) {
       this.displaySuccessPrompt = true;
-      // Write new password to user data.
-      // Go to login page after confirm prompt.
-      // this.router.navigate(['auth/login']);
     }
-  }
-
-  onCheckPasswords() {
-    this.passwordsMatch.next(
-      this.authPasswordService.comparePasswords(
-        this.authForm.value['new-password'],
-        this.authForm.value['confirm-password']
-      )
-    );
+    ///////////// Wait for success prompt to close before navigating away. /////////
+    // Write new password to user data. //////////////////////
+    // this._router.navigate(['/auth/login']);
   }
 }

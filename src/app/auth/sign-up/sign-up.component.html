@@ -3,66 +3,39 @@
   <!-- Dynamic email PIN prompt -->
 
   <!-- ### -->
-  <form #authForm="ngForm" (ngSubmit)="onSubmit()">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()">
     <!-- User input container -->
     <div class="container-textbox">
-      <label class="label-top" for="user">Usuário</label>
+      <label class="label-top" for="login">Usuário</label>
       <input
         class="input-textbox"
         type="text"
-        name="user"
-        id="user"
+        name="login"
+        id="login"
         ngModel
         required
+        minlength="3"
       >
     </div>
-    <!-- Email input container -->
-    <div class="container-textbox">
-      <label class="label-top" for="user">Email</label>
-      <input
-        class="input-textbox"
-        type="email"
-        name="email"
-        id="email"
-        ngModel
-        required
-        email
-      >
-    </div>
-    <!-- Password input container -->
-    <div class="container-textbox">
-      <label class="label-top" for="password">Senha</label>
-      <input
-        class="input-textbox"
-        type="password"
-        name="password"
-        id="password"
-        ngModel
-        required
-        minlength="4"
-      >
-    </div>
-    <!-- Password confirm input container -->
-    <div class="container-textbox">
-      <label class="label-top" for="confirm-password">Confirmar senha</label>
-      <input
-        class="input-textbox"
-        type="password"
-        name="confirm-password"
-        id="confirm-password"
-        ngModel
-        required
-        minlength="4"
-        (blur)="onConfirmPassword()"
-      >
-    </div>
+    <!-- New password component -->
+    <app-new-password
+      (passwordsOk)="getPasswordsOk($event)"
+      (password)="getPassword($event)"
+    ></app-new-password>
     <!-- Remember me checkbox and confirm button container -->
     <div class="container-button-checkbox">
-      <div></div>
+      <button
+        type="button"
+        role="button"
+        (click)="onReturn()"
+      >Voltar</button>
       <button
         type="submit"
         role="button"
-        [disabled]="!authForm.valid"
+        [disabled]="
+          !userForm.valid ||
+          !passwordsOk
+        "
       >Confirmar</button>
     </div>
     <!-- ### -->

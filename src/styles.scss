@@ -1,1 +1,200 @@
-/* You can add global styles to this file, and also import other style files */
+
+// ##### Positioning and Sizing ##### //
+
+// ## Extendables ## //
+
+.margin-default {
+  margin: 10px 0px;
+  padding: 15px 0px 5px;
+}
+
+// ## Containers ## //
+
+.container-form {
+  @extend .bordered-large;
+
+  position: relative;
+  padding: 20px 40px;
+  width: 500px;
+}
+
+.container-textbox {
+  @extend .margin-default;
+
+  position: relative;
+  height: 30px;
+}
+
+.container-textbox-sbs {
+  position: relative;
+  height: 30px;
+  width: 245px;
+}
+
+.container-sbs {
+  @extend .margin-default;
+
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.container-button {
+  @extend .margin-default;
+
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.container-button-checkbox {
+  @extend .margin-default;
+
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.container-register {
+  @extend .margin-default;
+
+  position: relative;
+  height: 30px;
+  margin-top: 10%;
+  padding-bottom: 30px;
+}
+
+
+// ## Inputs ## //
+
+input {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: small;
+}
+
+.input-textbox {
+  @extend .bordered-small;
+
+  height: 30px;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: gainsboro;
+  }
+}
+
+.input-textbox-sbs {
+  @extend .bordered-small;
+
+  height: 30px;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: gainsboro;
+  }
+}
+
+.input-checkbox {
+  @extend .bordered-small;
+}
+
+
+// ## Labels ## //
+
+.label-top {
+  position: absolute;
+  background-color: white;
+  padding: 0px 2px;
+  bottom: 29px;
+  left: 20px;
+}
+
+.label-top-sbs {
+  z-index: 100;
+  position: absolute;
+  background-color: white;
+  padding: 0px 2px;
+  bottom: 24px;
+  left: 20px;
+
+  // &::after { // ideally, ::backdrop would solve the issue. Not all browsers support it, though.
+  //   content: '';
+  //   position: absolute;
+  //   background-color: white;
+  //   height: 1px;
+  //   width: 104%;
+  //   top: 12px;
+  //   left: -2%;
+  // }
+}
+
+
+// ## Buttons ## //
+
+button {
+  @extend .bordered-small;
+
+  position: relative;
+  height: 25px;
+  width: 80px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: gainsboro;
+  }
+  &:active {
+    background-color: ghostwhite;
+    box-shadow: 0 0 0px grey inset;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ghostwhite;
+    box-shadow: 0 0 0px #999 inset;
+  }
+}
+
+
+// ##### Shapes and Colors ##### //
+
+.outline {
+  outline: 1px solid red;
+}
+
+.backdrop {
+  z-index: 50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.bordered-large {
+  @extend .shadowed;
+
+  border-radius: 10px;
+  border: 1px solid grey;
+}
+
+.bordered-small {
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.shadowed {
+  box-shadow: 0px 0px 5px grey;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid darkred;
+  box-shadow: 0 0 3px darkred inset;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

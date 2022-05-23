@@ -9,9 +9,12 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
-import { CustomCheckboxComponent } from '../assets/styles/custom-checkbox/custom-checkbox.component';
+import { CustomCheckboxComponent } from './shared/components/custom-checkbox/custom-checkbox.component';
 import { EmailPinPromptComponent } from './auth/email-pin-prompt/email-pin-prompt.component';
 import { PopupMessageComponent } from './shared/components/popup-message/popup-message.component';
+import { PersonDataComponent } from './auth/person-data/person-data.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewPasswordComponent } from './shared/components/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +26,16 @@ import { PopupMessageComponent } from './shared/components/popup-message/popup-m
     RecoverPasswordComponent,
     CustomCheckboxComponent,
     EmailPinPromptComponent,
-    PopupMessageComponent
+    PopupMessageComponent,
+    PersonDataComponent,
+    NewPasswordComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,26 +1,12 @@
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 50;
-}
 
-.outline {
-  outline: 1px solid red;
-}
 
 .container {
-  @extend .bordered-large;
-
+  z-index: 100;
   position: absolute;
   width: 20vw;
   height: 120px;
   min-width: 500px;
   padding: 10px;
-  z-index: 100;
   background: white;
 }
 
@@ -32,56 +18,11 @@
   min-height: 40px;
 }
 
-.container-button {
+.container-buttons {
   position: relative;
   margin: 20px 0px 0px;
 }
 
 button {
-  @extend .bordered-small;
-
-  position: relative;
-  height: 25px;
-  width: 80px;
   margin: 0px 10px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: gainsboro;
-    // box-shadow: 0 0 10px grey inset;
-  }
-  &:active {
-    background-color: ghostwhite;
-    box-shadow: 0 0 0px grey inset;
-  }
-  &:disabled {
-    cursor: not-allowed;
-    background-color: ghostwhite;
-    box-shadow: 0 0 0px grey inset;
-  }
-}
-
-input.ng-invalid.ng-touched {
-  border: 1px solid darkred;
-  box-shadow: 0 0 3px darkred inset;
-}
-
-.bordered-large {
-  @extend .shadowed;
-
-  border-radius: 10px;
-  border-width: 1px;
-  border-color: grey;
-  border-style: solid;
-}
-
-.bordered-small {
-  border-radius: 5px;
-  border-width: 1px;
-  border-color:grey;
-  border-style: solid;
-}
-
-.shadowed {
-  box-shadow: 0px 0px 5px #666;
 }

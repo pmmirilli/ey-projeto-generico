@@ -1,3 +1,4 @@
+
 /* Original code credits go to https://www.w3schools.com/howto/howto_css_custom_checkbox.asp. Thank you! The rest was me. */
 
 /* Hide the browser's default checkbox */
@@ -26,20 +27,17 @@
   user-select: none;
 }
 
-.outline {
-  outline: 1px solid red;
-}
-
 /* Create a custom checkbox */
 .custom-checkmark {
   position: absolute;
   top: 0px;
-  left: 1px;
-  height: 23px;
-  width: 23px;
-  border: 1px solid grey; // #2a342c;
+  left: 0px;
+  height: 25px;
+  width: 25px;
+  border: 1px solid grey;
   border-radius: 5px;
   background-color: white;
+  box-sizing: border-box;
 }
 
 /* On mouse-over, add background color */

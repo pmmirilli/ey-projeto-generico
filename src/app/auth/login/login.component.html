@@ -35,7 +35,11 @@
     <!-- Remember me checkbox and login button container -->
     <div class="container-button-checkbox">
       <div>
-        <app-custom-checkbox label="Manter-me conectado" [default]="false" (checkedState)="getCheckedState($event)"></app-custom-checkbox>
+        <app-custom-checkbox
+          label="Manter-me conectado"
+          [default]="true"
+          (checkedState)="getCheckedState($event)"
+        ></app-custom-checkbox>
       </div>
       <!-- <span>
         <input
@@ -55,7 +59,8 @@
     <div class="container-register">
       <p class="register-text">Ainda não possui uma conta?
         <a
-          routerLink="/auth/sign-up"
+          routerLink="/"
+          (click)="onRegister()"
         >Cadastre-se</a>.
       </p>
     </div>

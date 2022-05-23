@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthEmailService } from 'src/app/services/auth-email.service';
+import { AuthEmailService, PinErrorCode } from 'src/app/services/auth/auth-email.service';
 
 @Component({
   selector: 'app-email-pin-prompt',
@@ -10,15 +10,15 @@ import { AuthEmailService } from 'src/app/services/auth-email.service';
 export class EmailPinPromptComponent implements OnInit, OnDestroy {
   @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
 
-  emailSent: boolean = false;
-  authOk: boolean = false;
-  emailFailedMessage: string = '';
-  pinErrorMessage: string = '';
+  public emailSent: boolean = false;
+  public authOk: boolean = false;
+  public emailFailedMessage: string = '';
+  public pinErrorMessage: string = '';
 
-  constructor(private router: Router, private authEmailService: AuthEmailService) { }
+  constructor(private _router: Router, private _authEmailService: AuthEmailService) { }
 
   ngOnInit(): void {
-    this.authEmailService.emailFailedMessage.subscribe( // AGORA, É NECESSÁRIO FAZER DE MODO QUE A CONTAGEM CONTINUE MESMO COM O APLICATIVO RECARREGADO. SERVIÇO DE IP?
+    this._authEmailService.emailFailedMessage.subscribe( // AGORA, É NECESSÁRIO FAZER DE MODO QUE A CONTAGEM CONTINUE MESMO COM O APLICATIVO RECARREGADO. SERVIÇO DE IP?
       (message) => {
         this.emailFailedMessage = message;
         this.emailSent = !!message;
@@ -28,16 +28,17 @@ export class EmailPinPromptComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.authOk) {
-      this.authEmailService.emailFailedMessage.unsubscribe();
+      this._authEmailService.emailFailedMessage.unsubscribe();
     }
   }
 
-  onSendEmail() {
+  onSendEmail(): void {
     this.emailSent = true;
-    this.authEmailService.emailTimeout(60);
+    this._authEmailService.emailTimeout(60);
   }
 
   pinAuth(): boolean {
+    // Conferir a validez do PIN fornecido.
     return true;
   }
 
@@ -46,7 +47,7 @@ export class EmailPinPromptComponent implements OnInit, OnDestroy {
     if (event.key !== 'Backspace') {
       element = event.target?.nextElementSibling;
       if (!/[0-9]/.test(event.key)) {
-        this.pinErrorText('numbers-only');
+        this.pinErrorMessage = this._authEmailService.pinErrorMessage(PinErrorCode.NumbersOnly);
       }
     }
     if (event.key === 'Backspace') {
@@ -60,31 +61,16 @@ export class EmailPinPromptComponent implements OnInit, OnDestroy {
     }
   }
 
-  pinErrorText(errorCode: string) {
-    let text = '';
-    switch (errorCode) {
-      case 'numbers-only':
-        text = 'O PIN aceita apenas números.'; // 'The PIN takes only numbers.';
-        break;
-      case 'invalid-pin':
-        text = 'O PIN fornecido é inválido.'; // 'The provided PIN is invalid.';
-        break;
-      default:
-        text = 'PIN: erro desconhecido.'; // 'Unknown PIN error.';
-    }
-    this.pinErrorMessage = text;
-  }
-
-  onOk() {
+  onOk(): void {
     if (this.pinAuth()) {
       this.authOk = true;
-      this.router.navigate(['auth/recover-password']);
+      this._router.navigate(['auth/recover-password']);
     } else {
-      this.pinErrorText('invalid-pin');
+      this.pinErrorMessage = this._authEmailService.pinErrorMessage(PinErrorCode.InvalidPin);
     }
   }
 
-  onCancel() {
+  onCancel(): void {
     this.cancel.emit();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +8,13 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+
   @ViewChild('authForm') authForm!: NgForm;
 
-  requestedPasswordReset: boolean = false;
-  isResettingPassword: boolean = false;
+  public requestedPasswordReset: boolean = false;
+  public isResettingPassword: boolean = false;
+
+  constructor(private _router: Router) { }
 
   ///// GETS CHECHED STATE FROM CHECKBOX /////
   isChecked: boolean | undefined;
@@ -18,7 +22,7 @@ export class LoginComponent {
   getCheckedState(state: boolean) {
     this.isChecked = state;
   }
-  /////
+  ///// - /////
 
   onForgotPassword() {
     this.requestedPasswordReset = true;
@@ -34,7 +38,12 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log('Form submitted.');
-    console.log(this.authForm.value);
+    console.log(this.authForm.value); ///// /////
+
+    this._router.navigate(['/']);
+  }
+
+  onRegister() {
+    this._router.navigate(['/auth/person-data']);
   }
 }

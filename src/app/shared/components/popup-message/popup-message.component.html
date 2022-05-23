@@ -1,12 +1,28 @@
 <!-- Backdrop -->
 <div class="backdrop"></div>
 <!-- Main form container -->
-<div class="container">
+<div class="container bordered-large">
   <div class="sub-container">
     <p class="container-message">{{ message }}</p>
     <span>
-      <div class="container-button">
-        <button type="button" (click)="onClick()">{{ buttonText }}</button>
+      <div class="container-buttons">
+        <button
+          *ngIf="!yesButtonText && !noButtonText"
+          type="button"
+          (click)="onClick()"
+        >{{ buttonText }}</button>
+        <button
+          *ngIf="yesButtonText"
+          type="button"
+          class="yes-button"
+          (click)="onYesClick()"
+        >{{ yesButtonText }}</button>
+        <button
+          *ngIf="noButtonText"
+          type="button"
+          class="no-button"
+          (click)="onNoClick()"
+        >{{ noButtonText }}</button>
       </div>
     </span>
   </div>

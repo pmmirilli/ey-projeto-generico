@@ -1,0 +1,111 @@
+<!-- Main form container -->
+<div class="container-form">
+  <!-- Dynamic email PIN prompt -->
+
+  <!-- ### -->
+  <form #authForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="container-sbs">
+      <!-- NAME input container -->
+      <div class="container-textbox-sbs name">
+        <label class="label-top-sbs" for="name">Nome completo</label>
+        <input
+          class="input-textbox-sbs"
+          type="text"
+          name="name"
+          id="name"
+          ngModel
+          required
+          minlength="2"
+        >
+      </div>
+      <!-- BIRTH date input container -->
+      <div class="container-textbox-sbs birth">
+        <label class="label-top-sbs" for="birth">Nascimento</label>
+        <input
+          class="input-textbox-sbs"
+          type="date"
+          name="birthDate"
+          id="birth"
+          ngModel
+          required
+        >
+      </div>
+    </div>
+    <div class='container-sbs'>
+      <!-- EMAIL input container -->
+      <div class="container-textbox-sbs email">
+        <label class="label-top-sbs" for="email">Email</label>
+        <input
+          class="input-textbox-sbs"
+          type="email"
+          name="email"
+          id="email"
+          ngModel
+          required
+          email
+        >
+      </div>
+      <!-- PHONE input container -->
+      <div class="container-textbox-sbs phone">
+        <label class="label-top-sbs" for="phone">Telefone</label>
+        <input
+          class="input-textbox-sbs"
+          type="text"
+          name="phone"
+          id="phone"
+          ngModel
+          required
+          minlength="13"
+          maxlength="13"
+        >
+      </div>
+    </div>
+    <div class="container-sbs">
+      <!-- PHOTO input container -->
+      <div class="container-textbox-sbs">
+        <label class="label-top-sbs custom-file-label" for="photo">Foto</label>
+        <label class="custom-file">
+          <input
+            type="file"
+            name="photo"
+            id="photo"
+            ngModel
+            required
+            accept="image/*"
+          >
+          <p class="custom-file-path" name="document-path">{{ cropFileName(authForm.value.photo) }}</p>
+        </label>
+      </div>
+      <!-- Document input container -->
+      <div class="container-textbox-sbs">
+        <label class="label-top-sbs custom-file-label" for="document">Documento</label>
+        <label class="custom-file">
+          <input
+            type="file"
+            name="document"
+            id="document"
+            ngModel
+            required
+            accept="image/*,.pdf"
+
+          >
+          <p class="custom-file-path" name="document-path">{{ cropFileName(authForm.value.document) }}</p>
+        </label>
+      </div>
+    </div>
+    <!-- Button container -->
+    <div class="container-button">
+      <button
+        type="button"
+        role="button"
+        (click)="onReturn()"
+      >Voltar</button>
+      <button
+        type="submit"
+        role="button"
+        [disabled]="!authForm.valid"
+      >Confirmar</button>
+    </div>
+    <!-- ### -->
+  </form>
+</div>

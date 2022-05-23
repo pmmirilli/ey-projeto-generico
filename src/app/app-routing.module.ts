@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginComponent } from './auth/login/login.component';
+import { PersonDataComponent } from './auth/person-data/person-data.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { AuthComponent } from './auth/auth.component';
 import { RecoverPasswordComponent } from './auth/recover-password/recover-password.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'auth', component: AuthComponent, children: [
     { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
+    { path: 'person-data', component: PersonDataComponent },
     { path: 'sign-up', component: SignUpComponent },
     { path: 'recover-password', component: RecoverPasswordComponent },
     { path: 'test', component: EmailPinPromptComponent }
